@@ -9,6 +9,11 @@ def main():
     last_update = yesterday.strftime("%m-%d-%Y")
     url =  url+'/' + str(last_update) + '.csv'
     response = requests.get(url)
+    
+    ## We can check if data not available and do something else with it
+    if response.status_code == 404 or response.status_code == 400:
+       return print('No new data')
+        
     ## data is inside of response.text
     print(response.text)
 
